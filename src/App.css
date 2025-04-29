@@ -101,6 +101,8 @@ button {
 #editor {
   --border: #8e8e8e;
   border-right: 1.5px solid var(--border);
+  max-height: calc(100vh - 50px);
+  overflow: auto;
 }
 
 @media (max-width: 1250px) {
@@ -115,6 +117,10 @@ button {
   }
   #log {
     font-size: large;
+  }
+  #editor {
+    border-right: 0;
+    border-bottom: 1.5px solid var(--border);
   }
 }
 
