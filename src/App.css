@@ -117,3 +117,7 @@ button {
     font-size: large;
   }
 }
+
+.cm-completionInfo {
+  font-family: monospace;
+}
