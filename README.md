@@ -1,4 +1,4 @@
-![SamJS](public/favicon.png)
+![SamJS](icon.png)
 
 # [SamJS](https://samjs.vercel.app)
 
