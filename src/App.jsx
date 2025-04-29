@@ -137,7 +137,7 @@ function App() {
 
   return (
     <>
-      <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '2px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '2px solid black', color: 'black' }}>
+      <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '1.5px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '1.5px solid black', color: 'black' }}>
         <h1 style={{color: '#38b6ff'}}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
         <button id='theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
       </header>
