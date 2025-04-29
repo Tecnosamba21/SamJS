@@ -83,7 +83,7 @@ You can switch between dark and light modes by pressing the theme button:
 
 ### Dark mode
 
-![Dark mode](image-2.png)
+![Dark mode](DarkMode.png)
 
 ### Light mode
 
