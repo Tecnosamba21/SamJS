@@ -49,7 +49,7 @@ function App() {
   }
 
   const runner = useRef(null)
-  const [code, setCode] = useState(localStorage.getItem('code') || 'console.log("Edit this code")')
+  const [code, setCode] = useState(localStorage.getItem('code') || 'console.log("Hello, world!")')
   const [log, setLog] = useState([])
   const [theme, setTheme] = useState('dark')
   const [editorTheme, setEditorTheme] = useState(oneDark)
@@ -73,8 +73,8 @@ function App() {
       if (e.data.type === 'warning') {
         setLog(log => [...log, <br />, <span className='warn'>⚠️ {e.data.content}</span>])
       }
-      if (e.data.type === 'alert') {
-        alert(e.data.content)
+      if (e.data.type === 'info') {
+        setLog(log => [...log, <br />, <span className='info'>ℹ️ {e.data.content}</span>])
       }
     }
     runner.current.onmessage = e => messageHandler(e)

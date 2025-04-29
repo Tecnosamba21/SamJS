@@ -66,6 +66,11 @@ textarea:active, textarea:focus {
   text-shadow: rgba(250, 255, 94, 0.595) 0 0 20px;
 }
 
+.info {
+  color: rgb(0, 166, 237);
+  text-shadow: rgba(0, 166, 237, 0.595) 0 0 20px;
+}
+
 span {
   font-weight: 400;
 }
