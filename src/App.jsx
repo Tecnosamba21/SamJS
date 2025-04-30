@@ -25,8 +25,8 @@ function App() {
       'font-family': 'Fira Code',
       'padding': '9px'
     },
-    '.cm-content::selection': {
-      'background-color': 'purple'
+    '::selection': {
+      'color': 'hotpink'
     }
   }
 
@@ -43,8 +43,8 @@ function App() {
       'font-family': 'Fira Code',
       'padding': '9px'
     },
-    '.cm-content::selection': {
-      'background-color': 'purple'
+    '::selection': {
+      'color': 'hotpink'
     }
   }
 
