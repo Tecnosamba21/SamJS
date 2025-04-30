@@ -49,6 +49,7 @@ textarea:active, textarea:focus {
   font-size: x-large;
   padding: 20px;
   overflow: auto;
+  white-space: pre-wrap;
 }
 
 .error {

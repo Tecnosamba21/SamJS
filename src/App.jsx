@@ -65,7 +65,7 @@ function App() {
     runner.current = new JsRunner()
     const messageHandler = e => {
       if (e.data.type === 'log') {
-        setLog(log => [...log, <br />, <span className='log'>'{e.data.content}'</span>])
+        setLog(log => [...log, <br />, <span className='log'>{e.data.content.split('')[0] === '{' ? e.data.content : `'${e.data.content}'`}</span>])
       }
       if (e.data.type === 'error') {
         setLog(log => [...log, <br />, <span className='error'>❌ {e.data.content}</span>])

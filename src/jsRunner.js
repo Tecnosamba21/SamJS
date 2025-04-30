@@ -4,7 +4,7 @@ onmessage = e => {
             console.log = data => {
                 if (data != null) {
                     if (typeof data === 'object') {
-                        postMessage({content: JSON.stringify(data), type: 'log'})
+                        postMessage({content: JSON.stringify(data, null, ' '), type: 'log'})
                     } else {
                         postMessage({content: data.toString(), type: 'log'})
                     }
