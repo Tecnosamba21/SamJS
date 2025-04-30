@@ -123,6 +123,7 @@ function App() {
       editor.current?.dispatch({
         changes: { from: 0, to: editor.current.state.doc.length, insert: decoded }
       })
+      setCode(decoded)
     }
   }, [])
 
