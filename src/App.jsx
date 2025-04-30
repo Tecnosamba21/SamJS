@@ -1,4 +1,5 @@
 import './App.css'
+import './hint.css'
 import { useEffect, useRef, useState } from 'react'
 import JsRunner from '/src/jsRunner.js?worker'
 import { EditorView } from '@codemirror/view'
@@ -54,6 +55,7 @@ function App() {
   const [theme, setTheme] = useState('dark')
   const [editorTheme, setEditorTheme] = useState(oneDark)
   const [stylesTheme, setStylesTheme] = useState(EditorView.theme(darkTheme))
+  const [copyToolTip, setCopyToolTip] = useState('Copy shareable link')
   const editor = useRef(null)
   const editorDiv = useRef(null)
   const themeCompartment = useRef(new Compartment).current
@@ -106,10 +108,22 @@ function App() {
     editor.current = new EditorView({
       state: EditorState.create({
         doc: code,
-        extensions: [basicSetup, javascript(), themeCompartment.of(editorTheme), stylesCompartment.of(stylesTheme), updateListener, autocompletion({override: [globalCompletions]})],
+        extensions: [basicSetup, javascript(), themeCompartment.of(editorTheme), stylesCompartment.of(stylesTheme), updateListener, autocompletion({ override: [globalCompletions] })],
       }),
       parent: editorDiv.current
     })
+  }, [])
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search)
+    const encoded = params.get('c')
+
+    if (encoded) {
+      const decoded = decodeURIComponent(atob(encoded))
+      editor.current?.dispatch({
+        changes: { from: 0, to: editor.current.state.doc.length, insert: decoded }
+      })
+    }
   }, [])
 
   const changeTheme = () => {
@@ -135,11 +149,25 @@ function App() {
     })
   }
 
+  const copyShareableLink = () => {
+    const EncryptedUrl = btoa(encodeURIComponent(editor.current.state.doc.toString()))
+    const url = `${window.location.origin}?c=${EncryptedUrl}`
+
+    navigator.clipboard.writeText(url)
+      .then(() => {
+        setCopyToolTip('Copied!')
+        setTimeout(() => setCopyToolTip('Copy shareable link'), 2000)
+      })
+  }
+
   return (
     <>
       <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '1.5px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '1.5px solid black', color: 'black' }}>
-        <h1 style={{color: '#38b6ff'}}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
-        <button id='theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
+        <h1 style={{ color: '#38b6ff' }}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
+        <div className="buttons">
+          <button id='share' className='hint--bottom-left hint--bounce hint--rounded' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link'/></button>
+          <button id='theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
+        </div>
       </header>
       <main >
         <div id='editor' ref={editorDiv} style={theme === 'dark' ? { '--border': '#8e8e8e' } : { '--border': 'black' }} />

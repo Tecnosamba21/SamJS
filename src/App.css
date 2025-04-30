@@ -133,3 +133,15 @@ button {
 .cm-completionInfo {
   font-family: monospace;
 }
+
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+
+.buttons #share img {
+  height: 30px;
+  width: 30px;
+}
