@@ -4,7 +4,7 @@ onmessage = e => {
             console.log = data => {
                 if (data != null) {
                     if (typeof data === 'object') {
-                        postMessage({content: JSON.stringify(data, null, ' '), type: 'log'})
+                        postMessage({content: JSON.stringify(data), type: 'log'})
                     } else {
                         postMessage({content: data.toString(), type: 'log'})
                     }
@@ -36,8 +36,9 @@ onmessage = e => {
             }
             const require = async packageUrl => {
                 try {
-                    const module = await import(packageUrl)
-                    return module
+                    const packageModule = await import(packageUrl)
+                    if (packageModule['default'] == null) return packageModule
+                    return packageModule.default
                 } catch(err) { postMessage({content: err.toString(), type: 'error'}) }
             }
             const __$__userCode = async () => {
