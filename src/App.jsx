@@ -157,7 +157,7 @@ function App() {
     navigator.clipboard.writeText(url)
       .then(() => {
         setCopyToolTip('Copied!')
-        setTimeout(() => setCopyToolTip('Copy shareable link'), 2000)
+        setTimeout(() => setCopyToolTip('Copy shareable link'), 1000)
       })
   }
 
@@ -167,7 +167,7 @@ function App() {
         <h1 style={{ color: '#38b6ff' }}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
         <div className="buttons">
           <button id='share' className='hint--bottom-left hint--bounce hint--rounded' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link'/></button>
-          <button id='theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
+          <button id='theme' className='hint--bottom-left hint--bounce hint--rounded' aria-label='Switch theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
         </div>
       </header>
       <main >
