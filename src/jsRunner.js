@@ -8,10 +8,12 @@ onmessage = e => {
                     } else {
                         postMessage({content: data.toString(), type: 'log'})
                     }
+                } else {
+                    postMessage({content: 'null', type: 'log'})
                 }
             }
             console.error = data => {
-                if (data == null) return
+                if (data == null) postMessage({content: 'null', type: 'error'})
                 if (typeof data === 'object') {
                     postMessage({content: JSON.stringify(data, null, ' '), type: 'error'})
                 } else {
@@ -19,7 +21,7 @@ onmessage = e => {
                 }
             }
             console.warning = data => {
-                if (data == null) return
+                if (data == null) postMessage({content: 'null', type: 'warn'})
                 if (typeof data === 'object') {
                         postMessage({content: JSON.stringify(data, null, ' '), type: 'warning'})
                 } else {
@@ -28,7 +30,7 @@ onmessage = e => {
             }
             console.warn = data => console.warning(data)
             console.info = data => {
-                if (data == null) return
+                if (data == null) postMessage({content: 'null', type: 'info'})
                 if (typeof data === 'object') {
                         postMessage({content: JSON.stringify(data, null, ' '), type: 'info'})
                 } else {
