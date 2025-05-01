@@ -31,12 +31,20 @@ testing and prototyping your JS code.
 
 ## Import modules
 
-You can **import modules** in your program by using the method `required`, it takes one parameter: the url of the hosted library. An example:
+You can **import modules** in your program by using the async method `require`:
+
+```javascript
+require(<url>) -> Promise(<library>)
+```
+
+An example importing `random-words`:
 
 ```javascript
 const rw = await require('https://esm.sh/random-words@1.1.2')
 console.log(rw['wordList'])
 ```
+
+[Open in SamJS 🔌](http://localhost:5173?c=Y29uc3QlMjBydyUyMCUzRCUyMGF3YWl0JTIwcmVxdWlyZSgnaHR0cHMlM0ElMkYlMkZlc20uc2glMkZyYW5kb20td29yZHMlNDAxLjEuMicpJTBBY29uc29sZS5sb2cocnclNUInd29yZExpc3QnJTVEKQ==)
 
 > [!NOTE]
 > You can only import libraries wich use [ECMAScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) modules
@@ -52,13 +60,15 @@ fetch(<url>)
 
 Otherwise, you will get an empty object (`{}`) as the response.
 
-An example calling the pokeapi:
+An example calling the *pokeapi*:
 
 ```javascript
 fetch('https://pokeapi.co/api/v2/pokemon/ditto')
    .then(res => res.json())
    .then(response => console.log(response.name)) // Prints 'ditto'
 ```
+
+[Open in SamJS 🔌](http://localhost:5173?c=ZmV0Y2goJ2h0dHBzJTNBJTJGJTJGcG9rZWFwaS5jbyUyRmFwaSUyRnYyJTJGcG9rZW1vbiUyRmRpdHRvJyklMEElMjAlMjAlMjAudGhlbihyZXMlMjAlM0QlM0UlMjByZXMuanNvbigpKSUwQSUyMCUyMCUyMC50aGVuKHJlc3BvbnNlJTIwJTNEJTNFJTIwY29uc29sZS5sb2cocmVzcG9uc2UubmFtZSkp)
 
 ## Use the console methods -> `log`, `info`, `warning`, `error`
 
@@ -71,7 +81,9 @@ console.warning('This is a warning')
 console.error('This is an error')
 ```
 
-The last example in the app:
+[Open in SamJS 🔌](http://localhost:5173?c=Y29uc29sZS5sb2coJ1RoaXMlMjBpcyUyMGElMjBsb2cnKSUwQWNvbnNvbGUuaW5mbygnVGhpcyUyMGlzJTIwc29tZSUyMGluZm8nKSUwQWNvbnNvbGUud2FybmluZygnVGhpcyUyMGlzJTIwYSUyMHdhcm5pbmcnKSUwQWNvbnNvbGUuZXJyb3IoJ1RoaXMlMjBpcyUyMGFuJTIwZXJyb3InKQ==)
+
+The example in the app:
 
 ![Log example](image.png)
 
