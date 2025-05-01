@@ -26,6 +26,7 @@ onmessage = e => {
                     postMessage({content: data.toString(), type: 'warning'})
                 }
             }
+            console.warn = data => console.warning(data)
             console.info = data => {
                 if (data == null) return
                 if (typeof data === 'object') {

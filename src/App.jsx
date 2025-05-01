@@ -27,7 +27,25 @@ function App() {
       'padding': '9px'
     },
     '::selection': {
-      'color': 'hotpink'
+      color: 'hotpink'
+    },
+    '.cm-button': {
+      'border': '0',
+      'margin': '5px',
+      'width': 'fit-content',
+      'height': 'fit-content',
+      'padding': '5px',
+      'border-radius': '4px',
+      'background-color': '#313131',
+      'background-image': 'none',
+      'font-family': 'Fira Code'
+    },
+    '.cm-search': {
+      'font-family': 'Fira Code'
+    },
+    '.cm-textfield': {
+      'border-radius': '4px',
+      'font-family': 'Fira Code'
     }
   }
 
@@ -46,6 +64,24 @@ function App() {
     },
     '::selection': {
       'color': 'hotpink'
+    },
+    '.cm-button': {
+      'margin': '5px',
+      'width': 'fit-content',
+      'height': 'fit-content',
+      'padding': '5px',
+      'border-radius': '4px',
+      'background-color': 'white',
+      'border': '1.5px solid black',
+      'background-image': 'none',
+      'font-family': 'Fira Code'
+    },
+    '.cm-search': {
+      'font-family': 'Fira Code'
+    },
+    '.cm-textfield': {
+      'border-radius': '4px',
+      'font-family': 'Fira Code'
     }
   }
 
@@ -166,7 +202,7 @@ function App() {
       <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '1.5px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '1.5px solid black', color: 'black' }}>
         <h1 style={{ color: '#38b6ff' }}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
         <div className="buttons">
-          <button id='share' className='hint--bottom-left hint--bounce hint--rounded' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link'/></button>
+          <button id='share' className='hint--bottom-left hint--bounce hint--rounded' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link' /></button>
           <button id='theme' className='hint--bottom-left hint--bounce hint--rounded' aria-label='Switch theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
         </div>
       </header>
