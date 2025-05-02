@@ -47,6 +47,7 @@ onmessage = e => {
             const __$__userCode = async () => {
                 ${e.data}
             }
+            postMessage({content: '', type: 'init'})
             __$__userCode()
         `)
     } catch (err) {

@@ -105,6 +105,9 @@ function App() {
   useEffect(() => {
     runner.current = new JsRunner()
     const messageHandler = e => {
+      if (e.data.type === 'init') {
+        setLog([])
+      }
       if (e.data.type === 'log') {
         setLog(log => [...log, <br />, <span className='log'>{e.data.content.split('')[0] === '{' ? e.data.content : `'${e.data.content}'`}</span>])
       }
@@ -136,9 +139,10 @@ function App() {
 
     const updateListener = EditorView.updateListener.of(update => {
       if (update.docChanged) {
+        setLog([])
+        setCode('')
         const currentCode = update.state.doc.toString()
         setCode(currentCode)
-        setLog([])
         localStorage.setItem('code', currentCode)
         runner.current.postMessage(currentCode)
       }
@@ -159,7 +163,6 @@ function App() {
 
     if (encoded) {
       const decoded = decodeURIComponent(atob(encoded))
-      setLog([])
       editor.current?.dispatch({
         changes: { from: 0, to: editor.current.state.doc.length, insert: decoded }
       })
