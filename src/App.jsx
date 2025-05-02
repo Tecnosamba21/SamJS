@@ -137,7 +137,6 @@ function App() {
     const updateListener = EditorView.updateListener.of(update => {
       if (update.docChanged) {
         setLog([])
-        setCode('')
         const currentCode = update.state.doc.toString()
         setCode(currentCode)
         localStorage.setItem('code', currentCode)
