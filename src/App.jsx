@@ -245,7 +245,7 @@ function App() {
         <div className="packages">
           {packages}
         </div>
-        <button onClick={() => setDialogOpen(false)}>×</button>
+        <button onClick={() => setDialogOpen(false)} style={theme === 'dark' ? {color: 'white'} : {color: 'black'}}>×</button>
       </dialog>
     </>
   )
