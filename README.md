@@ -44,7 +44,7 @@ const rw = await require('https://esm.sh/random-words@1.1.2')
 console.log(rw['wordList'])
 ```
 
-[Open in SamJS 🔌](http://localhost:5173?c=Y29uc3QlMjBydyUyMCUzRCUyMGF3YWl0JTIwcmVxdWlyZSgnaHR0cHMlM0ElMkYlMkZlc20uc2glMkZyYW5kb20td29yZHMlNDAxLjEuMicpJTBBY29uc29sZS5sb2cocnclNUInd29yZExpc3QnJTVEKQ==)
+[Open in SamJS 🔌](https://samjs.vercel.app?c=Y29uc3QlMjBydyUyMCUzRCUyMGF3YWl0JTIwcmVxdWlyZSgnaHR0cHMlM0ElMkYlMkZlc20uc2glMkZyYW5kb20td29yZHMlNDAxLjEuMicpJTBBY29uc29sZS5sb2cocnclNUInd29yZExpc3QnJTVEKQ==)
 
 > [!NOTE]
 > You can only import libraries wich use [ECMAScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Modules) modules
@@ -68,7 +68,7 @@ fetch('https://pokeapi.co/api/v2/pokemon/ditto')
    .then(response => console.log(response.name)) // Prints 'ditto'
 ```
 
-[Open in SamJS 🔌](http://localhost:5173?c=ZmV0Y2goJ2h0dHBzJTNBJTJGJTJGcG9rZWFwaS5jbyUyRmFwaSUyRnYyJTJGcG9rZW1vbiUyRmRpdHRvJyklMEElMjAlMjAlMjAudGhlbihyZXMlMjAlM0QlM0UlMjByZXMuanNvbigpKSUwQSUyMCUyMCUyMC50aGVuKHJlc3BvbnNlJTIwJTNEJTNFJTIwY29uc29sZS5sb2cocmVzcG9uc2UubmFtZSkp)
+[Open in SamJS 🔌](https://samjs.vercel.app?c=ZmV0Y2goJ2h0dHBzJTNBJTJGJTJGcG9rZWFwaS5jbyUyRmFwaSUyRnYyJTJGcG9rZW1vbiUyRmRpdHRvJyklMEElMjAlMjAlMjAudGhlbihyZXMlMjAlM0QlM0UlMjByZXMuanNvbigpKSUwQSUyMCUyMCUyMC50aGVuKHJlc3BvbnNlJTIwJTNEJTNFJTIwY29uc29sZS5sb2cocmVzcG9uc2UubmFtZSkp)
 
 ## Use the console methods -> `log`, `info`, `warning`, `error`
 
@@ -81,7 +81,7 @@ console.warning('This is a warning')
 console.error('This is an error')
 ```
 
-[Open in SamJS 🔌](http://localhost:5173?c=Y29uc29sZS5sb2coJ1RoaXMlMjBpcyUyMGElMjBsb2cnKSUwQWNvbnNvbGUuaW5mbygnVGhpcyUyMGlzJTIwc29tZSUyMGluZm8nKSUwQWNvbnNvbGUud2FybmluZygnVGhpcyUyMGlzJTIwYSUyMHdhcm5pbmcnKSUwQWNvbnNvbGUuZXJyb3IoJ1RoaXMlMjBpcyUyMGFuJTIwZXJyb3InKQ==)
+[Open in SamJS 🔌](https://samjs.vercel.app?c=Y29uc29sZS5sb2coJ1RoaXMlMjBpcyUyMGElMjBsb2cnKSUwQWNvbnNvbGUuaW5mbygnVGhpcyUyMGlzJTIwc29tZSUyMGluZm8nKSUwQWNvbnNvbGUud2FybmluZygnVGhpcyUyMGlzJTIwYSUyMHdhcm5pbmcnKSUwQWNvbnNvbGUuZXJyb3IoJ1RoaXMlMjBpcyUyMGFuJTIwZXJyb3InKQ==)
 
 The example in the app:
 
