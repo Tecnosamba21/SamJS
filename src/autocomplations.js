@@ -96,6 +96,7 @@ export const globalCompletions = completeFromList([
     { "label": 'log', "type": 'function', "info": 'Print something on the console' },
     { "label": 'error', "type": 'function', "info": 'Print an error on the console' },
     { "label": 'warning', "type": 'function', "info": 'Print a warning on the console' },
+    { "label": 'clear', "type": 'function', "info": 'Clear the console' },
     { "label": "Intl", "type": "variable", "info": "Internationalization API" },
     { "label": "Reflect", "type": "variable", "info": "Reflection API" },
     { "label": "Proxy", "type": "class", "info": "Proxy object for customization" },
