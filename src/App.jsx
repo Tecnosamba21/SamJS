@@ -84,20 +84,23 @@ function App() {
       'font-family': 'Fira Code'
     }
   }
-
+  
+  const githubLight = githubLightInit()
+  
   const runner = useRef(null)
   const [code, setCode] = useState(localStorage.getItem('code') || 'console.log("Hello, world!")')
   const [log, setLog] = useState([])
-  const [theme, setTheme] = useState('dark')
-  const [editorTheme, setEditorTheme] = useState(oneDark)
-  const [stylesTheme, setStylesTheme] = useState(EditorView.theme(darkTheme))
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
+  const [editorTheme, setEditorTheme] = useState(theme === 'dark' ? oneDark : githubLight)
+  const [stylesTheme, setStylesTheme] = useState(theme === 'dark' ? EditorView.theme(darkTheme) : EditorView.theme(lightTheme))
   const [copyToolTip, setCopyToolTip] = useState('Copy shareable link')
+  const [packages, setPackages] = useState([])
+  const [dialogOpen, setDialogOpen] = useState(false)
   const editor = useRef(null)
   const editorDiv = useRef(null)
   const themeCompartment = useRef(new Compartment).current
   const stylesCompartment = useRef(new Compartment).current
 
-  const githubLight = githubLightInit()
 
   useEffect(() => {
     runner.current = new JsRunner()
@@ -170,11 +173,13 @@ function App() {
 
     if (theme === 'dark') {
       setTheme('light')
+      localStorage.setItem('theme', 'light')
       newTheme = githubLight
       newStyles = EditorView.theme(lightTheme)
     }
     else {
       setTheme('dark')
+      localStorage.setItem('theme', 'dark')
       newTheme = oneDark
       newStyles = EditorView.theme(darkTheme)
     }
@@ -197,12 +202,34 @@ function App() {
       })
   }
 
+  const searchPackage = async e => {
+    if (e.key === 'Enter' && e.target.value) {
+      setPackages([])
+      fetch(`https://api.npms.io/v2/search?q=${e.target.value}`)
+        .then(res => res.json())
+        .then(response => {
+          Array.from(response.results).forEach(packageData => {
+            setPackages(packages => [...packages, <section onClick={() => {
+              editor.current.dispatch({
+                changes: {
+                  from: 0,
+                  insert: `const ${packageData.package.name.replace(/[-/@.]/g, '_')} = await require('https://esm.sh/${packageData.package.name}@latest')\n\n`
+                }
+              })
+              setDialogOpen(false)
+            }}><span>{packageData.package.name}</span><span>{packageData.package.publisher.username}</span></section>])
+          })
+        })
+    }
+  }
+
   return (
     <>
       <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '1.5px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '1.5px solid black', color: 'black' }}>
         <h1 style={{ color: '#38b6ff' }}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
         <div className="buttons">
-          <button id='share' className='hint--bottom-left hint--bounce hint--rounded' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link' /></button>
+          <button id='packageSearch' className='hint--bottom-left hint--bounce hint--rounded tool-button' aria-label='Search packages' onClick={() => dialogOpen ? setDialogOpen(false) : setDialogOpen(true)}><img src='/package.svg' alt='Copy shareable link' /></button>
+          <button id='share' className='hint--bottom-left hint--bounce hint--rounded tool-button' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link' /></button>
           <button id='theme' className='hint--bottom-left hint--bounce hint--rounded' aria-label='Switch theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
         </div>
       </header>
@@ -210,6 +237,14 @@ function App() {
         <div id='editor' ref={editorDiv} style={theme === 'dark' ? { '--border': '#8e8e8e' } : { '--border': 'black' }} />
         <div id='log' style={theme === 'dark' ? { backgroundColor: '#313131' } : { backgroundColor: 'white' }}>{log}</div>
       </main>
+      <dialog open={dialogOpen} style={theme === 'dark' ? {'--background': '#333333', '--color': 'white', '--border': 'white'} : {'--background': 'white', '--color': 'black', '--border': 'black'}}>
+        <h1>Search a package 📦</h1>
+        <input type="text" onKeyDown={searchPackage} placeholder='Package...' />
+        <div className="packages">
+          {packages}
+        </div>
+        <button onClick={() => setDialogOpen(false)}>×</button>
+      </dialog>
     </>
   )
 }

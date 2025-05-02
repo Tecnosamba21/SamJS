@@ -40,7 +40,8 @@ textarea {
   font-family: 'Fira Code';
 }
 
-textarea:active, textarea:focus {
+textarea:active,
+textarea:focus {
   outline: 0;
 }
 
@@ -117,14 +118,17 @@ button {
     grid-template-columns: 1fr;
     grid-template-rows: 1fr 1fr;
   }
+
   textarea {
     border-right: 0;
     border-bottom: 2px solid var(--border);
     font-size: large;
   }
+
   #log {
     font-size: large;
   }
+
   #editor {
     border-right: 0;
     border-bottom: 1.5px solid var(--border);
@@ -142,7 +146,108 @@ button {
   gap: 10px;
 }
 
-.buttons #share img {
+.buttons .tool-button img {
   height: 30px;
   width: 30px;
+}
+
+dialog {
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translateX(-50%) translateY(-50%);
+  -moz-transform: translateX(-50%) translateY(-50%);
+  -ms-transform: translateX(-50%) translateY(-50%);
+  transform: translateX(-50%) translateY(-50%);
+  height: 60%;
+  width: 70%;
+  border: 1.5px solid var(--border);
+  background-color: var(--background);
+  color: var(--color);
+  border-radius: 9px;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Fira Code';
+}
+
+dialog input {
+  font-family: 'Fira Code';
+  font-weight: 100;
+  color: var(--color);
+  border: 1.5px solid var(--border);
+  border-radius: 4px;
+  height: 30px;
+  width: 40%;
+  padding: 20px; 
+  font-size: x-large;
+  text-align: center;
+  outline: 0;
+  background-color: rgba(128, 128, 128, 0.315);
+}
+
+dialog input:active {
+  outline: 0;
+  border: 1.5px solid var(--border);
+  background-color: rgba(128, 128, 128, 0.315);
+}
+
+dialog[open] .packages {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: 350px;
+  overflow: auto;
+}
+
+dialog[open] section {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 500px;
+}
+
+dialog[open] section span {
+  max-width: 30ch;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
+dialog section:hover {
+  background-color: rgba(128, 128, 128, 0.315);
+}
+
+dialog button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  font-size: xx-large;
+  margin: 10px;
+}
+
+@media (max-width: 700px) {
+  dialog {
+    padding-top: 40px;
+    width: 370px;
+    height: 500px;
+  }
+  dialog h1 {
+    font-size: x-large;
+  }
+  dialog input {
+    width: 250px;
+    height: 30px;
+    padding: 7px;
+    font-size: large;
+  }
+  dialog[open] section {
+    width: 300px;
+  }
 }
