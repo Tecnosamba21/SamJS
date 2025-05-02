@@ -37,6 +37,7 @@ onmessage = e => {
                     postMessage({content: data.toString(), type: 'info'})
                 }
             }
+            console.clear = () => postMessage({content: '', type: 'clear'})
             const require = async packageUrl => {
                 try {
                     const packageModule = await import(packageUrl)

@@ -105,6 +105,9 @@ function App() {
   useEffect(() => {
     runner.current = new JsRunner()
     const messageHandler = e => {
+      if (e.data.type === 'clear') {
+        setLog([])
+      }
       if (e.data.type === 'log') {
         setLog(log => [...log, <br />, <span className='log'>{e.data.content.split('')[0] === '{' ? e.data.content : `'${e.data.content}'`}</span>])
       }
