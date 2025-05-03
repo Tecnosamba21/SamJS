@@ -46,6 +46,9 @@ function App() {
     '.cm-textfield': {
       'border-radius': '4px',
       'font-family': 'Fira Code'
+    },
+    '.cm-tooltip': {
+      'border-radius': '4px'
     }
   }
 
@@ -82,6 +85,9 @@ function App() {
     '.cm-textfield': {
       'border-radius': '4px',
       'font-family': 'Fira Code'
+    },
+    '.cm-tooltip': {
+      'border-radius': '4px'
     }
   }
   
