@@ -90,9 +90,10 @@ function App() {
       'border-radius': '4px'
     }
   }
-  
+
   const githubLight = githubLightInit()
-  
+  let isShared = false
+
   const runner = useRef(null)
   const [code, setCode] = useState(localStorage.getItem('code') || 'console.log("Hello, world!")')
   const [log, setLog] = useState([])
@@ -106,6 +107,7 @@ function App() {
   const editorDiv = useRef(null)
   const themeCompartment = useRef(new Compartment).current
   const stylesCompartment = useRef(new Compartment).current
+  const isSharedRef = useRef(isShared)
 
 
   useEffect(() => {
@@ -131,9 +133,6 @@ function App() {
     return () => runner.current.terminate()
   }, [])
 
-  useEffect(() => {
-    runner.current.postMessage(code)
-  }, [])
 
   useEffect(() => {
 
@@ -167,11 +166,16 @@ function App() {
     const encoded = params.get('c')
 
     if (encoded) {
+      isSharedRef.current = true
       const decoded = decodeURIComponent(atob(encoded))
       editor.current?.dispatch({
         changes: { from: 0, to: editor.current.state.doc.length, insert: decoded }
       })
     }
+  }, [])
+
+  useEffect(() => {
+    if (!isSharedRef.current) runner.current.postMessage(code)
   }, [])
 
   const changeTheme = () => {
@@ -245,13 +249,13 @@ function App() {
         <div id='editor' ref={editorDiv} style={theme === 'dark' ? { '--border': '#8e8e8e' } : { '--border': 'black' }} />
         <div id='log' style={theme === 'dark' ? { backgroundColor: '#313131' } : { backgroundColor: 'white' }}>{log}</div>
       </main>
-      <dialog open={dialogOpen} style={theme === 'dark' ? {'--background': '#333333', '--color': 'white', '--border': 'white'} : {'--background': 'white', '--color': 'black', '--border': 'black'}}>
+      <dialog open={dialogOpen} style={theme === 'dark' ? { '--background': '#333333', '--color': 'white', '--border': 'white' } : { '--background': 'white', '--color': 'black', '--border': 'black' }}>
         <h1>Search a package 📦</h1>
         <input type="text" onKeyDown={searchPackage} placeholder='Package...' />
         <div className="packages">
           {packages}
         </div>
-        <button onClick={() => setDialogOpen(false)} style={theme === 'dark' ? {color: 'white'} : {color: 'black'}}>×</button>
+        <button onClick={() => setDialogOpen(false)} style={theme === 'dark' ? { color: 'white' } : { color: 'black' }}>×</button>
       </dialog>
     </>
   )
