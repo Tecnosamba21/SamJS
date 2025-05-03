@@ -251,3 +251,8 @@ dialog button {
     width: 300px;
   }
 }
+
+button:disabled {
+  opacity: 40%;
+  cursor: not-allowed;
+}
