@@ -2,6 +2,8 @@
 
 # [SamJS](https://samjs.vercel.app)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/Tecnosamba21/SamJS)
+
 SamJS is an **Open Source** in-real-time JavaScript runner for
 testing and prototyping your JS code.
 
