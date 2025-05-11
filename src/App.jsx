@@ -10,6 +10,8 @@ import { githubLightInit } from '@uiw/codemirror-theme-github'
 import { Compartment, EditorState } from '@codemirror/state'
 import { globalCompletions } from './autocomplations'
 import { autocompletion } from '@codemirror/autocomplete'
+import Auth from './components/Auth'
+import Save from './components/Save'
 
 function App() {
 
@@ -240,22 +242,24 @@ function App() {
       <header style={theme === 'dark' ? { backgroundColor: '#313131', borderBottom: '1.5px solid #8e8e8e' } : { backgroundColor: 'white', borderBottom: '1.5px solid black', color: 'black' }}>
         <h1 style={{ color: '#38b6ff' }}>Sam<span style={{ color: 'yellow' }}>JS</span></h1>
         <div className="buttons">
-          <button id='packageSearch' className='hint--bottom-left hint--bounce hint--rounded tool-button' aria-label='Search packages' onClick={() => dialogOpen ? setDialogOpen(false) : setDialogOpen(true)}><img src='/package.svg' alt='Copy shareable link' /></button>
-          <button id='share' className='hint--bottom-left hint--bounce hint--rounded tool-button' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link' /></button>
-          <button id='theme' className='hint--bottom-left hint--bounce hint--rounded' aria-label='Switch theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
+          <Save theme={theme} code={code} editor={editor} />
+          <button id='packageSearch' className='hint--bottom-left hint--bounce hint--rounded tool-button button' aria-label='Search packages' onClick={() => dialogOpen ? setDialogOpen(false) : setDialogOpen(true)}><img src='/package.svg' alt='Copy shareable link' /></button>
+          <button id='share' className='hint--bottom-left hint--bounce hint--rounded tool-button button' aria-label={copyToolTip} disabled={code === ''} onClick={copyShareableLink}><img src='/share.svg' alt='Copy shareable link' /></button>
+          <button id='theme' className='hint--bottom-left hint--bounce hint--rounded button' aria-label='Switch theme' onClick={changeTheme}>{theme === 'dark' ? '🌙' : '☀️'}</button>
+          <Auth />
         </div>
       </header>
       <main >
         <div id='editor' ref={editorDiv} style={theme === 'dark' ? { '--border': '#8e8e8e' } : { '--border': 'black' }} />
         <div id='log' style={theme === 'dark' ? { backgroundColor: '#313131' } : { backgroundColor: 'white' }}>{log}</div>
       </main>
-      <dialog open={dialogOpen} style={theme === 'dark' ? { '--background': '#333333', '--color': 'white', '--border': 'white' } : { '--background': 'white', '--color': 'black', '--border': 'black' }}>
+      <dialog open={dialogOpen} style={theme === 'dark' ? { '--background': '#333333', '--color': 'white', '--border': 'white' } : { '--background': 'white', '--color': 'black', '--border': 'black' }} className='ui-dialog'>
         <h1>Search a package 📦</h1>
         <input type="text" onKeyDown={searchPackage} placeholder='Package...' />
         <div className="packages">
           {packages}
         </div>
-        <button onClick={() => setDialogOpen(false)} style={theme === 'dark' ? { color: 'white' } : { color: 'black' }}>×</button>
+        <button onClick={() => setDialogOpen(false)} style={theme === 'dark' ? { color: 'white' } : { color: 'black' }} className='close'>×</button>
       </dialog>
     </>
   )

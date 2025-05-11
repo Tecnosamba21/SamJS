@@ -1,0 +1,40 @@
+.dialog-button {
+    cursor: pointer;
+    outline: 0;
+    border: 0;
+    border-radius: 9px;
+    font-size: medium;
+    font-family: 'Fira Code';
+    background-color: blue;
+    padding: 5px;
+}
+
+.snippets {
+    max-height: 500px;
+    overflow: auto;
+}
+
+.snippet {
+    overflow: hidden;
+}
+
+.snippet-buttons button {
+    opacity: 0;
+    transition: .35s opacity;
+}
+
+section:hover>.snippet-buttons button {
+    opacity: 1;
+}
+
+.cl-userButtonPopoverCard {
+    font-family: 'Fira Code';
+}
+
+.cl-modalContent {
+    font-family: 'Fira Code';
+}
+
+.cl-menuList {
+    font-family: 'Fira Code';
+}
