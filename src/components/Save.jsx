@@ -70,15 +70,17 @@ function Save(props) {
     }, [userEmail])
 
     const saveSnippet = async () => {
-        const { error, data } = await supabase.from('code').insert([
-            {
-                user_id: userId,
-                user_email: userEmail,
-                code: code
-            }
-        ])
+        if (snippets.length <= 4) {
+            const { error, data } = await supabase.from('code').insert([
+                {
+                    user_id: userId,
+                    user_email: userEmail,
+                    code: code
+                }
+            ])
 
-        getSnippets()
+            getSnippets()
+        }
     }
 
     return (
@@ -88,7 +90,7 @@ function Save(props) {
             </button>
             <dialog open={dialogOpen} style={theme === 'dark' ? { '--background': '#333333', '--color': 'white', '--border': 'white' } : { '--background': 'white', '--color': 'black', '--border': 'black' }} className='ui-dialog'>
                 <h1>Code snippets</h1>
-                <button className="dialog-button" onClick={saveSnippet}>Save current code</button>
+                <button className="dialog-button hint--bottom-left hint--bounce hint--rounded" onClick={saveSnippet} disabled={snippets.length > 4 || code.trim() < 1} aria-label={snippets.length > 4 ? 'Max. 4 snippets, delete one' : ''}>Save current code</button>
                 <div className="snippets">
                     {snippets}
                 </div>
