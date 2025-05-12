@@ -26,7 +26,7 @@ main {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  --bg: light-dark(white, #313131);
+  --bg: light-dark(white, #09090b);
   --border: light-dark(black, #8e8e8e);
 }
 
@@ -96,7 +96,9 @@ header {
   color: white;
 }
 
-dialog .close, .buttons .button, .ui-button {
+dialog .close,
+.buttons .button,
+.ui-button {
   width: 30px;
   height: 30px;
   font-size: x-large;
@@ -147,6 +149,7 @@ dialog .close, .buttons .button, .ui-button {
   gap: 10px;
 }
 
+.buttons .tool-button svg,
 .buttons .tool-button img {
   height: 30px;
   width: 30px;
@@ -161,11 +164,11 @@ dialog .close, .buttons .button, .ui-button {
   -ms-transform: translateX(-50%) translateY(-50%);
   transform: translateX(-50%) translateY(-50%);
   height: 60%;
-  width: 70%;
+  width: 60%;
   border: 1.5px solid var(--border);
   background-color: var(--background);
   color: var(--color);
-  border-radius: 9px;
+  border-radius: 0.5rem;
 }
 
 .ui-dialog[open] {
@@ -181,21 +184,21 @@ dialog .close, .buttons .button, .ui-button {
   font-family: 'Fira Code';
   font-weight: 100;
   color: var(--color);
-  border: 1.5px solid var(--border);
+  border: 1.5px solid #8e8e8e;
   border-radius: 4px;
   height: 30px;
   width: 40%;
-  padding: 20px; 
+  padding: 20px;
   font-size: x-large;
   text-align: center;
   outline: 0;
-  background-color: rgba(128, 128, 128, 0.315);
+  background-color: var(--background);
 }
 
 .ui-dialog input:active {
   outline: 0;
   border: 1.5px solid var(--border);
-  background-color: rgba(128, 128, 128, 0.315);
+  background-color: var(--background);
 }
 
 .ui-dialog[open] .packages {
@@ -214,6 +217,7 @@ dialog .close, .buttons .button, .ui-button {
   border-radius: 4px;
   cursor: pointer;
   width: 500px;
+  transition: .25s;
 }
 
 .ui-dialog[open] section span {
@@ -223,7 +227,7 @@ dialog .close, .buttons .button, .ui-button {
 }
 
 .ui-dialog section:hover {
-  background-color: rgba(128, 128, 128, 0.315);
+  background-color: hsl(240 3.7% 15.9% / .5);
 }
 
 .ui-dialog .close {
@@ -245,15 +249,18 @@ dialog .close, .buttons .button, .ui-button {
     width: 370px;
     height: 500px;
   }
+
   .ui-dialog h1 {
     font-size: x-large;
   }
+
   .ui-dialog input {
     width: 250px;
     height: 30px;
     padding: 7px;
     font-size: large;
   }
+
   .ui-dialog[open] section {
     width: 300px;
   }
@@ -262,4 +269,22 @@ dialog .close, .buttons .button, .ui-button {
 button:disabled {
   opacity: 40%;
   cursor: not-allowed;
+}
+
+dialog[open] {
+  animation: open .35s forwards;
+}
+
+@keyframes open {
+  from {
+    -webkit-transform: translateX(-50%) translateY(-45%);
+    -moz-transform: translateX(-50%) translateY(-45%);
+    -ms-transform: translateX(-50%) translateY(-45%);
+  }
+
+  to {
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -ms-transform: translateX(-50%) translateY(-50%);
+  }
 }

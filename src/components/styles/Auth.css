@@ -1,11 +1,12 @@
 button[component='SignInButton'] {
-    font-size: 1.5ch;
-    width: 8ch;
-    font-family: 'Fira Code';
-    background-color: blue;
-    border: 0;
-    outline: 0;
-    border-radius: 4px;
-    padding: 3px;
     cursor: pointer;
+    outline: 0;
+    border: 0;
+    border-radius: 0.5rem;
+    font-size: medium;
+    font-family: 'Fira Code';
+    background-color: hsl(0 0% 98%);
+    padding-inline: 6px;
+    padding-block: 7px;
+    color: black;
 }
