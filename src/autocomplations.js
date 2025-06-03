@@ -61,13 +61,27 @@ export function globalCompletions(context) {
     const codeVariables = extractVariables(context.state.doc.toString())
     const codeFunctions = extractFunctions(context.state.doc.toString())
 
-    const codeComplations = completions.concat(codeVariables.map(variable => ({
-        label: variable,
-        type: 'variable'
-    }))).concat(codeFunctions.map(func => ({
-        label: func,
-        type: 'function'
-    })))
+    let codeComplations = completions
+
+    if (codeVariables && codeFunctions) {
+        codeComplations = completions.concat(codeVariables.map(variable => ({
+            label: variable,
+            type: 'variable'
+        }))).concat(codeFunctions.map(func => ({
+            label: func,
+            type: 'function'
+        })))
+    } else if (codeVariables) {
+        codeComplations = completions.concat(codeVariables.map(variable => ({
+            label: variable,
+            type: 'variable'
+        })))
+    } else if (codeFunctions) {
+        codeComplations = completions.concat(codeFunctions.map(func => ({
+            label: func,
+            type: 'function'
+        })))
+    }
 
     return {
         from: currentWord.from,
