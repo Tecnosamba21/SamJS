@@ -61,10 +61,10 @@ export function globalCompletions(context) {
     const codeVariables = extractVariables(context.state.doc.toString())
     const codeFunctions = extractFunctions(context.state.doc.toString())
 
-    const codeComplations = completions.concat(codeVariables?.map(variable => ({
+    const codeComplations = completions.concat(codeVariables.map(variable => ({
         label: variable,
         type: 'variable'
-    }))).concat(codeFunctions?.map(func => ({
+    }))).concat(codeFunctions.map(func => ({
         label: func,
         type: 'function'
     })))
