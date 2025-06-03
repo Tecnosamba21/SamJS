@@ -5,7 +5,7 @@ import JsRunner from '/src/jsRunner.js?worker'
 import { EditorView } from '@codemirror/view'
 import { basicSetup } from 'codemirror'
 import { javascript } from '@codemirror/lang-javascript'
-import { oneDark } from '@codemirror/theme-one-dark'
+import { dracula } from '@uiw/codemirror-theme-dracula'
 import { githubLightInit } from '@uiw/codemirror-theme-github'
 import { Compartment, EditorState } from '@codemirror/state'
 import { globalCompletions } from './autocomplations'
@@ -18,7 +18,10 @@ function App() {
   const darkTheme = {
     '&': {
       height: '100%',
-      width: '100%'
+      width: '100%',
+    },
+    ".cm-line": {
+      color: '#44b81d'
     },
     '.cm-gutters': {
       'display': 'none'
@@ -26,31 +29,10 @@ function App() {
     '.cm-content': {
       'background-color': '#09090b',
       'font-family': 'Fira Code',
-      'padding': '9px'
+      'padding': '9px',
     },
     '::selection': {
       color: 'hotpink'
-    },
-    '.cm-button': {
-      'border': '0',
-      'margin': '5px',
-      'width': 'fit-content',
-      'height': 'fit-content',
-      'padding': '5px',
-      'border-radius': '4px',
-      'background-color': '#09090b',
-      'background-image': 'none',
-      'font-family': 'Fira Code'
-    },
-    '.cm-search': {
-      'font-family': 'Fira Code'
-    },
-    '.cm-textfield': {
-      'border-radius': '4px',
-      'font-family': 'Fira Code'
-    },
-    '.cm-tooltip': {
-      'border-radius': '4px'
     }
   }
 
@@ -100,7 +82,7 @@ function App() {
   const [code, setCode] = useState(localStorage.getItem('code') || 'console.log("Hello, world!")')
   const [log, setLog] = useState([])
   const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark')
-  const [editorTheme, setEditorTheme] = useState(theme === 'dark' ? oneDark : githubLight)
+  const [editorTheme, setEditorTheme] = useState(theme === 'dark' ? dracula : githubLight)
   const [stylesTheme, setStylesTheme] = useState(theme === 'dark' ? EditorView.theme(darkTheme) : EditorView.theme(lightTheme))
   const [copyToolTip, setCopyToolTip] = useState('Copy shareable link')
   const [packages, setPackages] = useState([])
@@ -134,7 +116,6 @@ function App() {
     runner.current.onmessage = e => messageHandler(e)
     return () => runner.current.terminate()
   }, [])
-
 
   useEffect(() => {
 
@@ -194,7 +175,7 @@ function App() {
     else {
       setTheme('dark')
       localStorage.setItem('theme', 'dark')
-      newTheme = oneDark
+      newTheme = dracula
       newStyles = EditorView.theme(darkTheme)
     }
 
