@@ -33,6 +33,8 @@ function Save(props) {
         try {
             const { data } = await supabase.from('code').select('id, code').eq('user_email', userEmail)
 
+            if (data == null) return
+
             setSnippets(data.map((item, index) => (<section key={index} className='snippet'><span onClick={() => {
                 editor.current.dispatch({
                     changes: {
