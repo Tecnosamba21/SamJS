@@ -31,8 +31,11 @@ function App() {
       'font-family': 'Fira Code',
       'padding': '9px',
     },
-    '::selection': {
-      color: 'hotpink'
+    '.cm-selectionBackground': {
+      color: 'white'
+    },
+    '.cm-content ::selection': {
+      color: 'white'
     }
   }
 
