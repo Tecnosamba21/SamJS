@@ -36,7 +36,25 @@ function App() {
     },
     '.cm-content ::selection': {
       color: 'white'
-    }
+    },
+    '.cm-button': {
+      'border': '0',
+      'margin': '5px',
+      'width': 'fit-content',
+      'height': 'fit-content',
+      'padding': '5px',
+      'border-radius': '4px',
+      'background-color': '#09090b',
+      'background-image': 'none',
+      'font-family': 'Fira Code'
+    },
+    '.cm-search': {
+      'font-family': 'Fira Code'
+    },
+    '.cm-textfield': {
+      'border-radius': '4px',
+      'font-family': 'Fira Code'
+    },
   }
 
   const lightTheme = {
