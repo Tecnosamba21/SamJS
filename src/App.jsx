@@ -12,6 +12,8 @@ import { globalCompletions } from './autocomplations'
 import { autocompletion } from '@codemirror/autocomplete'
 import Auth from './components/Auth'
 import Save from './components/Save'
+import { libraryTooltip } from './components/libraryTooltip'
+import { commonStyles } from './commonStyles'
 
 function App() {
 
@@ -55,6 +57,20 @@ function App() {
       'border-radius': '4px',
       'font-family': 'Fira Code'
     },
+    '.cm-tooltip-below': {
+      border: '1px solid #8e8e8e'
+    },
+    '.cm-tooltip-hover': {
+      'background-color': '#09090b',
+      padding: '5px',
+      'font-family': 'Fira Code',
+      width: '300px',
+      height: '200px',
+      'overflow': 'auto',
+      'scrollbar-width': 'none',
+      'border-radius': '9px',
+    },
+    ...commonStyles
   }
 
   const lightTheme = {
@@ -93,7 +109,18 @@ function App() {
     },
     '.cm-tooltip': {
       'border-radius': '4px'
-    }
+    },
+    '.cm-tooltip-hover': {
+      'background-color': 'white',
+      padding: '5px',
+      'font-family': 'Fira Code',
+      width: '300px',
+      height: '200px',
+      'overflow': 'auto',
+      'scrollbar-width': 'none',
+      'border-radius': '9px',
+    },
+    ...commonStyles
   }
 
   const githubLight = githubLightInit()
@@ -159,7 +186,7 @@ function App() {
     editor.current = new EditorView({
       state: EditorState.create({
         doc: code,
-        extensions: [basicSetup, javascript(), themeCompartment.of(editorTheme), stylesCompartment.of(stylesTheme), updateListener, autocompletion({ override: [globalCompletions] })],
+        extensions: [basicSetup, libraryTooltip, javascript(), themeCompartment.of(editorTheme), stylesCompartment.of(stylesTheme), updateListener, autocompletion({ override: [globalCompletions] })],
       }),
       parent: editorDiv.current
     })
