@@ -52,36 +52,61 @@ export const libraryTooltip = hoverTooltip((view, pos) => {
             toolTip.className = 'cm-tooltip cm-tooltip-hover'
             toolTip.innerHTML = `
             <div class="require-tooltip">
-                <h2 class="title"><strong>${name ? name : ''}</strong>@${formatVersion(version)}</h2>
+                <h2 class="title"><strong>${name ? name : ''}</strong>@${version === 'latest' ? version : formatVersion(version)}</h2>
                 🔗 <a href=${match[1]} target="_blank">${match[1]}</a><br>
                 ${name ? 'Loading description...' : ''}
             </div>
             `
 
             if (name) {
-                fetch(`https://registry.npmjs.org/${name}`)
-                    .then(res => res.json())
-                    .then(response => {
-                        toolTip.innerHTML = `
+                if (version === 'latest') {
+                    fetch(`https://registry.npmjs.org/${name}`)
+                        .then(res => res.json())
+                        .then(response => {
+                            toolTip.innerHTML = `
                         <div class="require-tooltip">
-                            <h2 class="title"><strong>${name ? name : ''}</strong>@${formatVersion(version)}</h2>
+                            <h2 class="title"><strong>${name ? name : ''}</strong>@${version === 'latest' ? version : formatVersion(version)}</h2>
+                            🔗 <a href=${match[1]} target="_blank">${match[1]}</a><br>
+                            🧑‍💻 <span>${response['versions'][formatVersion(response['dist-tags']['latest'])]['_npmUser']['name']}</span><br>
+                            <br>
+                            <p>${response.description}</p>
+                        </div>
+                        `
+                        })
+                        .catch(() => {
+                            toolTip.innerHTML = `
+                        <div class="require-tooltip">
+                            <h2 class="title"><strong>${name ? name : ''}</strong>@${version === 'latest' ? version : formatVersion(version)}</h2>
+                            🔗 <a href=${match[1]} target="_blank">${match[1]}</a><br>
+                            <span>⚠️ Error when loading the description</span>
+                        </div>
+                        `
+                        })
+                } else {
+                    fetch(`https://registry.npmjs.org/${name}`)
+                        .then(res => res.json())
+                        .then(response => {
+                            toolTip.innerHTML = `
+                        <div class="require-tooltip">
+                            <h2 class="title"><strong>${name ? name : ''}</strong>@${version === 'latest' ? version : formatVersion(version)}</h2>
                             🔗 <a href=${match[1]} target="_blank">${match[1]}</a><br>
                             🧑‍💻 <span>${response['versions'][formatVersion(version)]['_npmUser']['name']}</span><br>
                             <br>
                             <p>${response.description}</p>
                         </div>
                         `
-                    })
-                    .catch(() => {
-                        toolTip.innerHTML = `
+                        })
+                        .catch(() => {
+                            toolTip.innerHTML = `
                         <div class="require-tooltip">
-                            <h2 class="title"><strong>${name ? name : ''}</strong>@${formatVersion(version)}</h2>
+                            <h2 class="title"><strong>${name ? name : ''}</strong>@${version === 'latest' ? version : formatVersion(version)}</h2>
                             🔗 <a href=${match[1]} target="_blank">${match[1]}</a><br>
                             <span>⚠️ Error when loading the description</span>
                         </div>
                         `
-                    })
+                        })
                 }
+            }
 
             return { dom: toolTip }
         }
